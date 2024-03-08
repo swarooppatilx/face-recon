@@ -6,59 +6,32 @@
     <title>Face Recognition App</title>
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <style>
-        body {
-            padding: 20px;
-        }
-    </style>
 </head>
 <body class="bg-light">
-  <div class="container mt-5">
-     <div class="row">
-       <div class="col-md-6 offset-md-3">
+    <div class="container mt-5">
         <h1 class="mb-4">Face Recognition App</h1>
 
-        <a href="/add" class="btn btn-dark mb-3">Add New Image</a>
+        <a href="/compare" class="btn btn-primary mb-3">Compare Images</a>
+        <a href="/upload_image" class="btn btn-success mb-3">Upload New Image</a>
 
-        <form action="/compare" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <input type="file" class="form-control" name="file" accept=".jpg, .png" required>
-            </div>
-            <button type="submit" class="btn btn-success">Compare</button>
-        </form>
+        {% if success is defined %}
+        <p class="alert alert-success mt-4">{{ success }}</p>
+        {% endif %}
 
-        {% if match is defined %}
+        {% if match %}
             <div class="mt-4">
-                {% if match %}
-                    <p class="alert alert-success">Match found with {{ matched_filename }}</p>
-                {% else %}
-                    <p class="alert alert-warning">No match found</p>
-                {% endif %}
+                <p>Name: {{ matched_desired_name }}</p>
+                <p>Instagram ID: <a href="https://instagram.com/{{ matched_instagram_id }}">@{{ matched_instagram_id }}</a></p>
+                <img src="{{matched_image_path}}" width="280px">
             </div>
         {% endif %}
 
         {% if error is defined %}
             <p class="alert alert-danger mt-4">{{ error }}</p>
         {% endif %}
-    </div> 
-  </div>
- </div>
+    </div>
 
     <!-- Include Bootstrap JS and Popper.js (for Bootstrap features like dropdowns) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Add service worker -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/static/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
-    </script>
 </body>
 </html>
