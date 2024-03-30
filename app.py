@@ -6,8 +6,11 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Replace this path with the path to your images folder
-images_path = "images"
-csv_file_path = "data.csv"  # Path to the CSV file to store data
+#images_path = "images"
+images_path = "/home/vanessa123/face-recon/images"
+
+#csv_file_path = "data.csv"  # Path to the CSV file to store data
+csv_file_path = "/home/vanessa123/face-recon/data.csv"
 
 # Set the folder where you want to store the uploaded images
 UPLOAD_FOLDER = images_path
@@ -145,7 +148,7 @@ def compare_image():
     if match_index is not None:
         matched_desired_name = existing_desired_names[match_index]
         matched_instagram_id = existing_instagram_ids[match_index]
-        matched_image_path = os.path.join(images_path, existing_image_files[match_index])
+        matched_image_path = "/images/" + existing_image_files[match_index] #setup /images Route
 
         # Return JSON data and render index page
         return render_template('index.html', success=f'Image matched successfully with {matched_desired_name.replace("_"," ")}', match=True,
