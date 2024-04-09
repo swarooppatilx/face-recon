@@ -7,6 +7,7 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}" />
     <style>
         body {
             padding: 20px;
@@ -18,20 +19,23 @@
      <div class="row">
        <div class="col-md-6 offset-md-3">
         <h1 class="mb-4">Face Recognition App</h1>
-
-        <a href="/add" class="btn btn-dark mb-3">Add New Image</a>
-
-        <form action="/compare" method="post" enctype="multipart/form-data">
+<a href="/" id="bt-home" class="btn btn-dark  mb-3">Home</a>
+<a href="/add" id="bt-add"  class="btn btn-primary mb-3">Add</a>
+<a href="/team" id="bt-team" class="btn btn-danger mb-3">Team</a>
+        <form action="/compare-image" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <input type="file" class="form-control" name="file" accept=".jpg, .png" required>
             </div>
             <button type="submit" class="btn btn-success">Compare</button>
         </form>
-
+	 {% if upload is defined %}
+            <p class="alert alert-success mt-4">{{ upload }}</p>
+        {% endif %}
         {% if match is defined %}
             <div class="mt-4">
                 {% if match %}
-                    <p class="alert alert-success">Match found with {{ matched_filename }}</p>
+                    <p class="alert alert-success">Match found with {{ matched_desired_name }}</p>
+		    <img src="{{matched_image_path}}" width="280px">
                 {% else %}
                     <p class="alert alert-warning">No match found</p>
                 {% endif %}
@@ -51,7 +55,7 @@
     <!-- Add service worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/static/service-worker.js')
+            navigator.serviceWorker.register('/static/sw.js')
                 .then((registration) => {
                     console.log('Service Worker registered with scope:', registration.scope);
                 })
