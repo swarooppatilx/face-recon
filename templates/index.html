@@ -24,7 +24,7 @@
 <a href="/team" id="bt-team" class="btn btn-danger mb-3">Team</a>
         <form action="/compare-image" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <input type="file" class="form-control" name="file" accept=".jpg, .png" required>
+                <input type="file" class="form-control" name="file" accept=".jpg, .png" required capture="camera">
             </div>
             <button type="submit" class="btn btn-success">Compare</button>
         </form>
@@ -33,12 +33,10 @@
         {% endif %}
         {% if match is defined %}
             <div class="mt-4">
-                {% if match %}
-                    <p class="alert alert-success">Match found with {{ matched_desired_name }}</p>
-		    <img src="{{matched_image_path}}" width="280px">
-                {% else %}
-                    <p class="alert alert-warning">No match found</p>
-                {% endif %}
+            {% if match %}
+             <p class="alert alert-success">Match found with {{ matched_desired_name }}</p>
+		     <img src="{{matched_aadhaar_path}}" width="450px">
+             {% endif %}
             </div>
         {% endif %}
 

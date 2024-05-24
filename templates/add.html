@@ -16,7 +16,7 @@
 <body class="container mt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1 class="mb-4">Upload and Display Image</h1>
+            <h1 class="mb-4">Upload Image</h1>
 
 <a href="/" id="bt-home" class="btn btn-dark  mb-3">Home</a>
 <a href="/add" id="bt-add"  class="btn btn-primary mb-3">Add</a>
@@ -24,11 +24,16 @@
             
             <form action="/add" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="file" class="form-label">Choose a file:</label>
+                    <label for="file" class="form-label">Upload Person's Image:</label>
                     <input type="file" class="form-control" name="file" id="file" accept=".png, .jpg, .jpeg, .gif">
                 </div>
+		
+<div class="mb-3">
+    <label for="aadhaar_file" class="form-label">Upload Aadhaar Image:</label>
+    <input type="file" class="form-control" name="aadhaar_file" id="aadhaar_file" accept=".png, .jpg, .jpeg, .gif">
+</div>
                 <div class="mb-3">
-                    <label for="desired_name" class="form-label">Desired Name:</label>
+                    <label for="desired_name" class="form-label">Name:</label>
                     <input type="text" class="form-control" name="desired_name" id="desired_name">
                 </div>
                 <button type="submit" class="btn btn-primary">Upload</button>
